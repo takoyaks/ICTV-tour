@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catsu CICT Virtual Tour</title>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Helvetica;
+        }
+
+        #tree {
+            width: 100%;
+            height: 100%;
+        }
+
+        [lcn='devs-group'] rect {
+            fill: #FFCA28;
+        }
+    </style>
+    <!-- BALKAN OrgChartJS js api -->
+
+    <script src="src/org_chart/orgchart.js"></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+    <script src="src/firebase/firebase.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid px-4 py-3">
+        <h2 class="mb-4 display-6 lh-1 fw-bold text-center">CICT Organizational Chart</h2>
+        <div class="mt-1" id="tree"> </div>
+    </div>
+
+    <script>
+        function getbscs(callbackIN) {
+            var firebaseRef = firebase.database().ref("faculty_cict_bscs");
+            firebaseRef.once("value", function (snapshot) {
+                var data = snapshot.val();
+                callbackIN(snapshot.val())
+                // for (let i in data) {
+                //     console.log(data[i]);
+                // }
+            });
+        }
+        window.addEventListener("load", getbscs(genFunction));
+        //convert and fetch to json 
+        function genFunction(data) {
+            var cdata = [];
+            var len = data.length;
+            for (var i = 1; i < len; i++) {
+                cdata.push({
+                    id: data[i]['id'],
+                    pid: data[i]['child_to'],
+                    img:data[i]['img_url'],
+                    name:data[i]['full_name'],
+                    title:data[i]['tags'],
+                    status:data[i]['employment_status']
+                });
+            }
+            
+            OrgChart.templates.mila.link = '<path stroke-linejoin="round" stroke="#aeaeae" stroke-width="2px" fill="none" d="{edge}" />';   
+            OrgChart.templates.mila.field_0 = '<text style="font-size: 15px;" x="109" y="90" text-anchor="middle">{val}</text>';
+            OrgChart.templates.mila.field_2 = '<text style="font-size:15px;" fill="#ffffff" x="170" y="50" text-anchor="middle">{val}</text>';
+            var chart = new OrgChart(document.getElementById('tree'), {
+                
+                template: 'mila',
+                mouseScrool: OrgChart.action.none,
+                align: OrgChart.align.center,
+                nodeMouseClick: OrgChart.action.expandCollapse,
+                nodeBinding: {
+                    field_0: "name",
+                    field_1: "title",
+                    field_2: "status",
+                    img_0: "img"
+
+                }
+            });
+            chart.load(cdata);        
+        }
+    </script>
+
+</body>
+
+</html>
