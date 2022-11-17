@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CICT Vistual Tour</title>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="src/pannellum/pannellum.main.css" />
+    <link rel="stylesheet" href="src/pannellum/style.css" />
+    <script type="text/javascript" src="src/pannellum/pannellum.js"></script>
+
+</head>
+
+<body>
+    <div id="panorama"></div>
+
+    <script>
+        pannellum.viewer('panorama', {
+            "default": {
+                "firstScene": "main_building",
+                "sceneFadeDuration": 1000,
+                "autoLoad": true,
+                "compass": true
+            },
+            "scenes": {
+                "main_building": {
+                    "title": "College of Information and Communications Technology",
+                    "hfov": 100,
+                    "pitch": 2.1,
+                    "yaw": 10,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/main_entrance.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 2.1,
+                            "yaw": 1,
+
+                            "type": "scene",
+                            "cssClass": "custom-hotspot-enter",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Entrance",
+                            "sceneId": "cict_lobby",
+                        }
+                    ]
+                },
+
+                "cict_lobby": {
+                    "title": "CICT Lobby",
+                    "hfov": 60,
+                    "yaw": 20,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_1.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 5,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "main_building",
+                            "targetYaw": 0,
+                            "targetPitch": 2,
+                            "cssClass": "custom-hotspot-enter",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Entrance"
+                        },
+                        //go up 2nd floor
+
+                        {
+                            "pitch": 13,
+                            "yaw": 40,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_gflor_stair",
+                            "targetYaw": -15,
+                            "targetPitch": 0,
+                            "cssClass": "custom-hotspot-arrow",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Second Floor"
+                        },
+                        //move
+                        {
+                            "pitch": 1,
+                            "yaw": 280,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_g1",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Walk"
+                        },
+                        //faculty info
+                        {
+                            "pitch": 0,
+                            "yaw": 213,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Faculty Officer"
+                        }
+                    ]
+                },
+                "cict_g1": {
+                    "title": "CICT Ground Floor",
+                    "hfov": 60,
+                    "yaw": 3.5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_2.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 5,
+                            "yaw": 150,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_lobby",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Lobby"
+                        },
+                        //continue walk 
+                        {
+                            "pitch": 0,
+                            "yaw": 0,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_g2",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        //re ext off
+                        {
+                            "pitch": 0,
+                            "yaw": 80,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Reserch & Extension Office"
+                        }
+                    ]
+                },
+                "cict_g2": {
+                    "title": "CICT Ground Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_4.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_g1",
+                            "targetYaw": 180,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 0,
+                            "type": "scene",
+                            "sceneId": "cict_g3",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        // it room
+                        {
+                            "pitch": 0,
+                            "yaw": 140,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Accredation Room"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 70,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Lab 1"
+                        }
+                        ,
+                        {
+                            "pitch": 0,
+                            "yaw": 230,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Facult Room"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 320,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Deans' Office"
+                        }
+
+                    ]
+
+                },
+
+                "cict_g3": {
+                    "title": "CICT Ground Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_5.jpg",
+                    "hotSpots": [
+                        //go back
+                        {
+                            "pitch": -5,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_g2",
+                            "targetYaw": 180,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        //forward
+                        {
+                            "pitch": 0,
+                            "yaw": 0,
+                            "type": "scene",
+                            "sceneId": "cict_g4",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 115,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Lab 1"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 70,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Semulation Room 2"
+                        }
+                        ,
+                        {
+                            "pitch": 0,
+                            "yaw": 300,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Simulation Room 1"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 230,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Conference Room"
+                        }
+                    ]
+
+                },
+                "cict_g4": {
+                    "title": "CICT Ground Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_6.jpg",
+                    "hotSpots": [
+                        //go back
+                        {
+                            "pitch": 0,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_g3",
+                            "targetYaw": 180,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+                        },
+                        //forward to pwd ramp 1
+                        {
+                            "pitch": 0,
+                            "yaw": 0,
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp1",
+                            "cssClass": "custom-hotspot-exit",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Exit"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 65,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Stock Room"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 130,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Semulation Room 2"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 280,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CR"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 230,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Simulation Room 1"
+                        }
+
+                    ]
+
+                },
+
+                //2nd floor
+                "cict_gflor_stair": {
+                    "title": "CICT 2nd floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_to_2nd.jpg",
+                    "hotSpots": [
+                        {
+                            //go up
+                            "pitch": 0,
+                            "yaw": 5,
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_2ndfloor_1",
+                            "cssClass": "custom-hotspot-arrow",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+
+
+                        },
+                        {
+                            //go down
+                            "pitch": -23,
+                            "yaw": 318,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_lobby",
+                            "targetYaw": 15,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-down",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground"
+                        }
+
+                    ]
+
+                },
+                "cict_2ndfloor_1": {
+                    "title": "CICT 2nd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_2ndfloor_1.jpg",
+                    "hotSpots": [
+                        {
+                            //go up
+                            "pitch": 11,
+                            "yaw": 211,
+                            "targetYaw": 10,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_2ndfloor_stair",
+                            "cssClass": "custom-hotspot-arrow",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 3rd Floor"
+
+
+                        },
+                        {
+                            //go down
+                            "pitch": -15,
+                            "yaw": 188,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_lobby",
+                            "targetYaw": 190,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-down",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground"
+                        }
+                        ,
+                        {
+                            //2nd floor walk
+                            "pitch": 0,
+                            "yaw": 95,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_2ndfloor_3",
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground"
+                        }
+                        ,
+                        {
+                            "pitch": 0,
+                            "yaw": 50,
+                            "type": "scene",
+                            "targetYaw": 15,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Network Operation Center"
+                        }
+
+                    ]
+
+                },
+                "cict_2ndfloor_3": {
+                    "title": "CICT 2nd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_2ndfloor_3.jpg",
+                    "hotSpots": [
+                        {
+                            //to pwd ramp
+                            "pitch": 0,
+                            "yaw": 2,
+                            "targetYaw": 1,
+                            "targetPitch": 0,
+                            "type": "scene",
+                            "sceneId": "cict_2ndfloor_4",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+
+
+                        },
+                        {
+                            //back
+                            "pitch": 0,
+                            "yaw": 183,
+                            "type": "scene",
+                            "text": "cict_2ndfloor_2",
+                            "sceneId": "cict_2ndfloor_1",
+                            "targetYaw": 200,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 90,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 3"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 135,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 2"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 238,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 5"
+                        },
+
+                        {
+                            "pitch": 3,
+                            "yaw": 282,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 4"
+                        }
+
+
+                    ]
+
+                }
+                ,
+                "cict_2ndfloor_4": {
+                    "title": "CICT 2nd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_2ndfloor_4.jpg",
+                    "hotSpots": [
+                        {
+                            //forward
+                            "pitch": -3,
+                            "yaw": 7,
+                            "targetYaw": 180,
+                            "targetPitch": 1,
+                            "type": "scene",
+                            "sceneId": "cict_ramp4",
+                            "cssClass": "custom-hotspot-exit",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "PWD Ramp"
+
+
+                        },
+                        {
+                            //back
+                            "pitch": -5,
+                            "yaw": 185,
+                            "type": "scene",
+                            "text": "cict_2ndfloor_2",
+                            "sceneId": "cict_2ndfloor_3",
+                            "targetYaw": 200,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+                        }
+                        ,
+                        {
+                            "pitch": 0,
+                            "yaw": 58,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Electrical Room"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 133,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 3"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 245,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Computer Lab 4"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 290,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CR"
+                        }
+
+
+                    ]
+
+                }
+                //3rd floor
+                //stair
+                ,
+                "cict_2ndfloor_stair": {
+                    "title": "CICT Exit",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_2nd_to_3rd.jpg",
+                    "hotSpots": [
+                        {
+                            //go up
+                            "pitch": 5,
+                            "yaw": 340,
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_1",
+                            "cssClass": "custom-hotspot-arrow",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 3rd Floor"
+
+
+                        },
+                        {
+                            //go down
+                            "pitch": -23,
+                            "yaw": 295,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_2ndfloor_1",
+                            "targetYaw": 80,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-down",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+                        }
+
+                    ]
+
+                },
+                //3rd floor
+                "cict_3rdfloor_1": {
+                    "title": "CICT 3rd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_3rdfloor_1.jpg",
+                    "hotSpots": [
+                        {
+                            //go up
+                            "pitch": 5,
+                            "yaw": 110,
+                            "targetYaw": 80,
+                            "targetPitch": 0,
+                            "type": "scene",
+                            "sceneId": "",
+                            "cssClass": "custom-hotspot-arrow",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Roof Top"
+
+
+                        },
+                        {
+                            //go down
+                            "pitch": -10,
+                            "yaw": 85,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_2ndfloor_stair",
+                            "targetYaw": 290,
+                            "targetPitch": -10,
+                            "cssClass": "custom-hotspot-down",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+                        },
+
+
+                        {
+                            //forward
+                            "pitch": -3,
+                            "yaw": 3,
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_2",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 25,
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_2ndfloor_1",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "It Room"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": 230,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Audio Visual Room"
+                        }
+                        ,
+                  
+
+                    ]
+
+                },
+                "cict_3rdfloor_2": {
+                    "title": "CICT 3rd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_3rdfloor_2.jpg",
+                    "hotSpots": [
+
+                        {
+                            //forward
+                            "pitch": -1,
+                            "yaw": 2,
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_3",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+                        {
+                            //go back
+                            "pitch": -5,
+                            "yaw": 183,
+                            "targetYaw": 180,
+                            "targetPitch": 0,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_1",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 70,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 2"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 133,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 1"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 245,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Audio Visual Room"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 300,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 4"
+                        }
+                    ]
+                },
+                "cict_3rdfloor_3": {
+                    "title": "CICT 3rd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_3rdfloor_3.jpg",
+                    "hotSpots": [
+
+                    {
+                            //forward
+                            "pitch": -8,
+                            "yaw": 0,
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_4",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+                        {
+                            //go back
+                            "pitch": -5,
+                            "yaw": 180,
+                            "targetYaw": 180,
+                            "targetPitch": 0,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_2",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 70,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 3"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 123,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 2"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 245,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 4"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 300,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 5"
+                        }
+                    ]
+                }
+                ,
+                "cict_3rdfloor_4": {
+                    "title": "CICT 3rd Floor",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_3rdfloor_4.jpg",
+                    "hotSpots": [
+
+                        {
+                            //forward
+                            "pitch": -3,
+                            "yaw": 0,
+                            "targetYaw": 85,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp7",
+                            "cssClass": "custom-hotspot-exit",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+                        {
+                            //go back
+                            "pitch": -5,
+                            "yaw": 180,
+                            "targetYaw": 180,
+                            "targetPitch": 0,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_2",
+                            "cssClass": "custom-hotspot-walk",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "walk"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 60,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "Student Center"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 128,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 3"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 235,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "IT Room 5"
+                        },
+
+                        {
+                            "pitch": 0,
+                            "yaw": 280,
+                            "type": "info",
+                            "text": "Faculty Office",
+                            "cssClass": "custom-hotspot-information",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CR"
+                        }
+                    ]
+                }
+
+
+
+                // pwd ramp
+                ,
+                "cict_ramp1": {
+                    "title": "CICT Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_1.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": 0,
+                            "yaw": 3,
+                            "targetYaw": 180,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_g4",
+                            "cssClass": "custom-hotspot-exit",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT Ground Floor"
+
+
+                        },
+                        {
+                            //forward
+                            "pitch": 5,
+                            "yaw": 95,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_ramp2",
+                            "targetYaw": 15,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        }
+
+                    ]
+
+                },
+                "cict_ramp2": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_2.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": -20,
+                            "yaw": 70,
+                            "targetYaw": 260,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp1",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 1st Floor"
+
+
+                        },
+                        {
+                            //forward
+                            "pitch": 0,
+                            "yaw": -3,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_ramp3",
+                            "targetYaw": 10,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        }
+
+                    ]
+                }
+                ,
+                "cict_ramp3": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_3.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": -20,
+                            "yaw": 70,
+                            "targetYaw": 260,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp2",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 1st Floor"
+                        },
+                        {
+                            //forward
+                            "pitch": 0,
+                            "yaw": -3,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_ramp4",
+                            "targetYaw": 94,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        }
+
+                    ]
+                },
+                "cict_ramp4": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_4.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": -15,
+                            "yaw": 270,
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp3",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        },
+                        {
+                            //forward
+                            "pitch": 0,
+                            "yaw": 85,
+                            "type": "scene",
+                            "sceneId": "cict_ramp5",
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 3rd Floor"
+                        },
+                        //enter cict 2nd floor
+                        {
+                            "pitch": 0,
+                            "yaw": 0,
+                            "type": "scene",
+                            "text": "",
+                            "sceneId": "cict_2ndfloor_4",
+                            "targetYaw": 180,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-enter",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 2nd Floor"
+                        }
+
+                    ]
+
+                },
+                "cict_ramp5": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_5.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": -20,
+                            "yaw": 70,
+                            "targetYaw": 260,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp4",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        },
+                        {
+                            //forward
+                            "pitch": 5,
+                            "yaw": 0,
+                            "type": "scene",
+                            "sceneId": "cict_ramp6",
+                            "targetYaw": 0,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 3rd Floor"
+                        }
+
+                    ]
+
+                }
+                ,
+                "cict_ramp6": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_6.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+                            "pitch": -20,
+                            "yaw": 75,
+                            "targetYaw": 260,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp4",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        },
+                        {
+                            //forward
+                            "pitch": 0,
+                            "yaw": 0,
+                            "type": "scene",
+                            "sceneId": "cict_ramp7",
+                            "targetYaw": 95,
+                            "targetPitch": 5,
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 3rd Floor"
+                        }
+
+                    ]
+
+                }
+
+                ,
+                "cict_ramp7": {
+                    "title": "CICT PWD Ramp",
+                    "hfov": 60,
+                    "yaw": 5,
+                    "type": "equirectangular",
+                    "panorama": "https://raw.githubusercontent.com/takoyaks/ICTV-tour/main/src/panoramic_images/cict_gfloor_pdwd_ramp_7.jpg",
+                    "hotSpots": [
+                        {
+                            //go back
+
+                            "pitch": -15,
+                            "yaw": 0,
+                            "targetYaw": 260,
+                            "targetPitch": 5,
+                            "type": "scene",
+                            "sceneId": "cict_ramp4",
+                            "cssClass": "custom-hotspot-wheel",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT PWD Ramp - 2nd Floor"
+                        },
+                        {
+                            //forward
+                            "pitch": -5,
+                            "yaw": 90,
+                            "type": "scene",
+                            "sceneId": "cict_3rdfloor_4",
+                            "targetYaw": 180,
+                            "targetPitch": 0,
+                            "cssClass": "custom-hotspot-enter",
+                            "createTooltipFunc": custom_hotspot,
+                            "createTooltipArgs": "CICT 3rd Floor"
+                        }
+                    ]
+                }
+
+
+
+
+            }
+
+        });
+
+        // Hot spot creation function
+        function custom_hotspot(hotSpotDiv, args) {
+            hotSpotDiv.classList.add('custom-tooltip');
+            var span = document.createElement('span');
+            span.innerHTML = args;
+            hotSpotDiv.appendChild(span);
+            span.style.width = span.scrollWidth - 20 + 'px';
+            span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
+            span.style.marginTop = -span.scrollHeight - 12 + 'px';
+        }
+    </script>
+</body>
+
+</html>
